@@ -15,11 +15,12 @@ class ApiController extends AbstractController
 
 {
     
-    #[Route('/home', name: 'app_home')]
+    #[Route('/users', name: 'users_list')]
     public function index(ApiHttpClient $apiHttpClient): Response
-    {   $users = $apiHttpClient->getUsers();
-        return $this->render('', [
-    
+    { 
+          $users = $apiHttpClient->getUsers();
+        return $this->render('user/index.html.twig', [
+            'users' => $users
         ]);
     }
 
