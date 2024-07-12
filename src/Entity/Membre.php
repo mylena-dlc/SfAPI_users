@@ -3,16 +3,19 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MembreRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\ApiResource;
-use Symfony\Component\Serialize\Annotation\Groups;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
+// Déclaration des opérations disponibles pour cette ressource API
 #[ApiResource(
     operations: [
+        // Définition de l'opération GET pour récupérer un élément spécifique
         new Get(normalizationContext: ['groups' => 'membre:item']),
+        // Définition pour récupérer une collection d'éléments de la ressource
         new GetCollection(normalizationContext: ['groups' => 'membre:list'])
     ]
 )]
@@ -37,34 +40,27 @@ class Membre
     private ?string $first = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $phone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
     #[ORM\Column(length: 20, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $streetnumber = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $streetname = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $postcode = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    #[Groups(['membre:list', 'membre:item'])]
     private ?string $country = null;
 
     public function getId(): ?int

@@ -14,11 +14,10 @@ class ApiController extends AbstractController
 
 
 {
-    
     #[Route('/users', name: 'users_list')]
     public function index(ApiHttpClient $apiHttpClient): Response
     { 
-          $users = $apiHttpClient->getUsers();
+        $users = $apiHttpClient->getUsers();
         return $this->render('user/index.html.twig', [
             'users' => $users
         ]);
@@ -26,7 +25,7 @@ class ApiController extends AbstractController
 
 
     #[Route('/users/add-membre', name: 'membre_add', methods: 'POST')]
-    public function addMembre(EntityManagerInterface $entityManager, Request $resquest, Membre $membre = null)
+    public function addMembre(EntityManagerInterface $entityManager, Request $resquest, Membre $membre = null): Response
     {
        $membre = new Membre();
 
@@ -42,7 +41,7 @@ class ApiController extends AbstractController
        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
        $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-       if($title && $last && $first  && $email && $phone && $picture && $streetnumber && $streetname && $postcode && $city && $country) {
+       if($title && $last && $first && $email && $phone && $picture && $streetnumber && $streetname && $postcode && $city && $country) {
             $membre->setTitle($title);
             $membre->setLast($last);
             $membre->setFirst($first);
